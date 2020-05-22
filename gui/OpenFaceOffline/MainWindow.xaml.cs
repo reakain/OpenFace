@@ -49,6 +49,8 @@ using FaceAnalyser_Interop;
 using GazeAnalyser_Interop;
 using FaceDetectorInterop;
 using UtilitiesOF;
+using ZeroMQ;
+using System.Text;
 
 namespace OpenFaceOffline
 {
@@ -142,6 +144,10 @@ namespace OpenFaceOffline
         // For AU prediction, if videos are long dynamic models should be used
         public bool DynamicAUModels { get; set; } = true;
 
+        // For broadcasting the results
+        ZeroMQ.ZContext zero_mq_context;
+        ZeroMQ.ZSocket zero_mq_socket;
+
         // Camera calibration parameters
         public float fx = -1, fy = -1, cx = -1, cy = -1;
 
@@ -172,6 +178,13 @@ namespace OpenFaceOffline
             landmark_detector = new CLNF(face_model_params);
 
             gaze_analyser = new GazeAnalyserManaged();
+
+            // Create the ZeroMQ context for broadcasting the results
+            zero_mq_context = ZContext.Create();
+            zero_mq_socket = new ZSocket(zero_mq_context, ZSocketType.PUB);
+
+            // Bind on localhost port 5000
+            zero_mq_socket.Bind("tcp://127.0.0.1:5000");
 
         }
 
@@ -494,6 +507,26 @@ namespace OpenFaceOffline
 
             var au_regs = face_analyser.GetCurrentAUsReg();
             var au_classes = face_analyser.GetCurrentAUsClass();
+
+            foreach (var key in au_regs.Keys)
+            {
+                if (au_regs.TryGetValue(key, out var key_val))
+                {
+                    var au_reg_string = string.Format("Regression_{0}:{1:F2}", key, key_val);
+                    Debug.WriteLine(au_reg_string);
+                    zero_mq_socket.Send(new ZFrame(au_reg_string, Encoding.UTF8));
+                }
+            }
+
+            foreach (var key in au_classes.Keys)
+            {
+                if (au_classes.TryGetValue(key, out var key_val))
+                {
+                    var au_class_string = string.Format("Classification_{0}:{1}", key, key_val);
+                    zero_mq_socket.Send(new ZFrame(au_class_string, Encoding.UTF8));
+                }
+            }
+
             recorder.SetObservationActionUnits(au_regs, au_classes);
 
             recorder.SetObservationFaceID(face_id);
