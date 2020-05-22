@@ -1,16 +1,16 @@
 import time
+import zmq
 
-def main():
-    print("test plox")
 
-    import zmq
+if __name__ == '__main__':
+    print("test plox", flush=True)
     port = "5000"
 
-    print("Do we get live prints before ZMQ?")
+    print("Do we get live prints before ZMQ?", flush=True)
     context = zmq.Context()
     socket = context.socket(zmq.SUB)
 
-    print( "Collecting head pose updates...")
+    print( "Collecting head pose updates...", flush=True)
 
     socket.connect ("tcp://localhost:%s" % port)
     topic_filter = "Regression_AU06:"
@@ -25,13 +25,9 @@ def main():
         #print(socket.recv())
 
         #print(topic + ':' + val)
-        print(topic +': %.1f' % (cheek_val))
+        print(topic +': %.1f' % (cheek_val), flush=True)
 
         time.sleep(0.01)
-
-if __name__ == '__main__':
-    main()
-
 
 
 
