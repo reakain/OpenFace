@@ -1,0 +1,162 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\gui\\OpenFaceCommandLine\\OpenFaceCommandLine.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\gui\\OpenFaceCommandLine\\OpenFaceCommandLine.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\gui\\OpenFaceCommandLine\\OpenFaceCommandLine.csproj",
+        "projectName": "OpenFaceCommandLine",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\gui\\OpenFaceCommandLine\\OpenFaceCommandLine.csproj",
+        "packagesPath": "C:\\Users\\rpreston\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\gui\\OpenFaceCommandLine\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rpreston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\CppInerop\\CppInerop.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\CppInerop\\CppInerop.vcxproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "ZeroMQ": {
+              "target": "Package",
+              "version": "[4.1.0.22, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\3rdParty\\CameraEnumerator\\CameraEnumerator.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\3rdParty\\CameraEnumerator\\CameraEnumerator.vcxproj",
+        "projectName": "CameraEnumerator",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\3rdParty\\CameraEnumerator\\CameraEnumerator.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\CppInerop\\CppInerop.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\CppInerop\\CppInerop.vcxproj",
+        "projectName": "CppInerop",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\CppInerop\\CppInerop.vcxproj",
+        "frameworks": {
+          "native": {
+            "projectReferences": {
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\3rdParty\\CameraEnumerator\\CameraEnumerator.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\3rdParty\\CameraEnumerator\\CameraEnumerator.vcxproj"
+              },
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\FaceAnalyser\\FaceAnalyser.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\FaceAnalyser\\FaceAnalyser.vcxproj"
+              },
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\GazeAnalyser\\GazeAnalyser.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\GazeAnalyser\\GazeAnalyser.vcxproj"
+              },
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\LandmarkDetector\\LandmarkDetector.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\LandmarkDetector\\LandmarkDetector.vcxproj"
+              },
+              "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\Utilities\\Utilities.vcxproj": {
+                "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\Utilities\\Utilities.vcxproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\FaceAnalyser\\FaceAnalyser.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\FaceAnalyser\\FaceAnalyser.vcxproj",
+        "projectName": "FaceAnalyser",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\FaceAnalyser\\FaceAnalyser.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\GazeAnalyser\\GazeAnalyser.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\GazeAnalyser\\GazeAnalyser.vcxproj",
+        "projectName": "GazeAnalyser",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\GazeAnalyser\\GazeAnalyser.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\LandmarkDetector\\LandmarkDetector.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\LandmarkDetector\\LandmarkDetector.vcxproj",
+        "projectName": "LandmarkDetector",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\LandmarkDetector\\LandmarkDetector.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
+    "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\Utilities\\Utilities.vcxproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\Utilities\\Utilities.vcxproj",
+        "projectName": "Utilities",
+        "projectPath": "C:\\Users\\rpreston\\source\\personal\\OpenFace\\lib\\local\\Utilities\\Utilities.vcxproj"
+      },
+      "frameworks": {
+        "native": {}
+      }
+    }
+  }
+}

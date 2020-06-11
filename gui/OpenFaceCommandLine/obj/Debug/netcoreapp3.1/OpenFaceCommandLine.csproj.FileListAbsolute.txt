@@ -1,0 +1,4 @@
+C:\Users\rpreston\source\personal\OpenFace\gui\OpenFaceCommandLine\bin\Debug\netcoreapp3.1\CppInerop.dll
+C:\Users\rpreston\source\personal\OpenFace\gui\OpenFaceCommandLine\obj\Debug\netcoreapp3.1\OpenFaceCommandLine.csprojAssemblyReference.cache
+C:\Users\rpreston\source\personal\OpenFace\gui\OpenFaceCommandLine\obj\Debug\netcoreapp3.1\OpenFaceCommandLine.AssemblyInfoInputs.cache
+C:\Users\rpreston\source\personal\OpenFace\gui\OpenFaceCommandLine\obj\Debug\netcoreapp3.1\OpenFaceCommandLine.AssemblyInfo.cs
