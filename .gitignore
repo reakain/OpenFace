@@ -81,6 +81,9 @@ gui/OpenFaceDemo/obj/Debug/
 gui/OpenFaceDemo/obj/Release/
 gui/HeadPose-live/obj/Release/
 gui/HeadPose-live/obj/Debug/
+gui/*/obj/Debug/
+gui/*/obj/Release/
+gui/*/obj/x86/
 lib/3rdParty/CameraEnumerator/x64/
 matlab_runners/Action Unit Experiments/out_bosph/
 matlab_runners/Action Unit Experiments/out_bp4d/
@@ -102,6 +105,8 @@ lib/local/Utilities/Debug/
 lib/3rdParty/CameraEnumerator/Debug/
 lib/local/CppInerop/Debug/
 *.user
+.vs/
+python_scripts/env/
 
 # IDE-generated folders
 .idea
