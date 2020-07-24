@@ -46,7 +46,17 @@ namespace OpenFaceCommandLine
         
         public Tuple<int, int, int> SetCamera(int cam_select)
         {
-            return new Tuple<int, int, int>(cam_select, cams[cam_select].Item3[0].Item1, cams[cam_select].Item3[0].Item2);
+            int res = 0;
+            var cam = cams[cam_select];
+            for (res = 0; res < cam.Item3.Count; ++res)
+            {
+                if (cam.Item3[res].Item1 >= 640 && cam.Item3[res].Item2 >= 480)
+                {
+                    break;
+                }
+            }
+            Console.WriteLine(string.Format("Camera is {0} with resolution {1}x{2}", cams[cam_select].Item2, cams[cam_select].Item3[res].Item1, cams[cam_select].Item3[res].Item2));
+            return new Tuple<int, int, int>(cam_select, cams[cam_select].Item3[res].Item1, cams[cam_select].Item3[res].Item2);
         }
     }
 }

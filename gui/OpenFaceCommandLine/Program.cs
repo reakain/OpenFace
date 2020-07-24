@@ -17,7 +17,7 @@ namespace OpenFaceCommandLine
             int cam_id = 0;
             bool do_analysis = false;
 
-            if (args.Length < 0)
+            if (args.Length < 1)
             {
                 do_analysis = true;
             }

@@ -11,6 +11,7 @@ using FaceDetectorInterop;
 using UtilitiesOF;
 using ZeroMQ;
 using System.Threading;
+using System.Windows;
 
 namespace OpenFaceCommandLine
 {
@@ -78,17 +79,18 @@ namespace OpenFaceCommandLine
             face_model_params = new FaceModelParameters(root, LandmarkDetectorCECLM, LandmarkDetectorCLNF, LandmarkDetectorCLM);
             // Initialize the face detector
             face_detector = new FaceDetector(face_model_params.GetHaarLocation(), face_model_params.GetMTCNNLocation());
-
+            Console.WriteLine("Checking MTCNN Loaded...");
             // If MTCNN model not available, use HOG
             if (!face_detector.IsMTCNNLoaded())
             {
                 DetectorCNN = false;
                 DetectorHOG = true;
             }
+            Console.WriteLine("Setting Face Model Parameters");
             face_model_params.SetFaceDetector(DetectorHaar, DetectorHOG, DetectorCNN);
-
+            Console.WriteLine("Setting the CLNF landmark detector...");
             landmark_detector = new CLNF(face_model_params);
-
+            Console.WriteLine("Setting the gaze analyser...");
             gaze_analyser = new GazeAnalyserManaged();
 
             // Create the ZeroMQ context for broadcasting the results
@@ -96,7 +98,7 @@ namespace OpenFaceCommandLine
             zero_mq_socket = new ZSocket(zero_mq_context, ZSocketType.PUB);
 
             // Bind on localhost port 5000
-            zero_mq_socket.Bind("tcp://127.0.0.1:5000");  
+            zero_mq_socket.Bind("tcp://127.0.0.1:5001");  
         }
 
         public void StartProcessing(Tuple<int, int, int> webcam)
@@ -133,7 +135,7 @@ namespace OpenFaceCommandLine
             face_model_params.optimiseForVideo();
 
             // Setup the visualization
-            Visualizer visualizer_of = new Visualizer(false || RecordTracked, false, false, false);
+            Visualizer visualizer_of = new Visualizer(true || RecordTracked, true, true, false);
 
             // Initialize the face analyser
             face_analyser = new FaceAnalyserManaged(AppDomain.CurrentDomain.BaseDirectory, DynamicAUModels, image_output_size, MaskAligned);
@@ -175,6 +177,9 @@ namespace OpenFaceCommandLine
 
                 gaze_analyser.AddNextFrame(landmark_detector, detection_succeeding, reader.GetFx(), reader.GetFy(), reader.GetCx(), reader.GetCy());
 
+                // Only the final face will contain the details
+                VisualizeFeatures(frame, visualizer_of, landmark_detector.CalculateAllLandmarks(), landmark_detector.GetVisibilities(), detection_succeeding, true, false, reader.GetFx(), reader.GetFy(), reader.GetCx(), reader.GetCy(), progress);
+
                 // Record an observation
                 RecordObservation(recorder, visualizer_of.GetVisImage(), 0, detection_succeeding, reader.GetFx(), reader.GetFy(), reader.GetCx(), reader.GetCy(), reader.GetTimestamp(), reader.GetFrameNumber());
 
@@ -211,6 +216,48 @@ namespace OpenFaceCommandLine
             reader.Close();
 
         }
+
+        private void VisualizeFeatures(RawImage frame, Visualizer visualizer, List<Tuple<float, float>> landmarks, List<bool> visibilities, bool detection_succeeding,
+            bool new_image, bool multi_face, float fx, float fy, float cx, float cy, double progress)
+        {
+
+            List<Tuple<Point, Point>> lines = null;
+            List<Tuple<float, float>> eye_landmarks = null;
+            List<Tuple<Point, Point>> gaze_lines = null;
+            Tuple<float, float> gaze_angle = new Tuple<float, float>(0, 0);
+
+            List<float> pose = new List<float>();
+            landmark_detector.GetPose(pose, fx, fy, cx, cy);
+            List<float> non_rigid_params = landmark_detector.GetNonRigidParams();
+
+            double confidence = landmark_detector.GetConfidence();
+
+            if (confidence < 0)
+                confidence = 0;
+            else if (confidence > 1)
+                confidence = 1;
+
+            double scale = landmark_detector.GetRigidParams()[0];
+
+            // Helps with recording and showing the visualizations
+            if (new_image)
+            {
+                visualizer.SetImage(frame, fx, fy, cx, cy);
+            }
+            visualizer.SetObservationHOG(face_analyser.GetLatestHOGFeature(), face_analyser.GetHOGRows(), face_analyser.GetHOGCols());
+            visualizer.SetObservationLandmarks(landmarks, confidence, visibilities);
+            visualizer.SetObservationPose(pose, confidence);
+            visualizer.SetObservationGaze(gaze_analyser.GetGazeCamera().Item1, gaze_analyser.GetGazeCamera().Item2, landmark_detector.CalculateAllEyeLandmarks(), landmark_detector.CalculateAllEyeLandmarks3D(fx, fy, cx, cy), confidence);
+
+            eye_landmarks = landmark_detector.CalculateVisibleEyeLandmarks();
+            lines = landmark_detector.CalculateBox(fx, fy, cx, cy);
+
+            gaze_lines = gaze_analyser.CalculateGazeLines(fx, fy, cx, cy);
+            gaze_angle = gaze_analyser.GetGazeAngle();
+
+
+        }
+
 
         // If the landmark detector model changed need to reload it
         private void ReloadLandmarkDetector()
